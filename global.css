@@ -1,0 +1,25 @@
+.rc {
+    width: 90% !important;
+    height: 375px !important;
+}
+
+.rc_root {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border:none;
+}
+
+.rc_body-days-of-month .rc_body-cell.rc_selected .rc_body-cell_value {
+    background-color: #ffcf12;
+    width: 60%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+
+.rc_header_label, .rc_header_nav {
+    display: none;
+}

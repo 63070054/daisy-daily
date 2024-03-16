@@ -9,11 +9,15 @@ import "./global.css";
 import DetailScreen from "./screen/DetailScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
+import NoteScreen from "./screen/์NoteScreen";
+import WriteScreen from "./screen/WriteScreen";
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   const [fontLoaded] = useFonts({
     ThaiText: require("./assets/fonts/ThaiText.ttf"),
+    DMSans: require("./assets/fonts/DMSans.ttf"),
+    NotoSansThai: require("./assets/fonts/NotoSansThai.ttf"),
   });
 
   if (!fontLoaded) {
@@ -29,6 +33,8 @@ export default function App() {
           options={{ headerShown: false, contentStyle:{backgroundColor: "white",}  }}
         />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen name="NoteScreen" component={NoteScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="WriteScreen" component={WriteScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

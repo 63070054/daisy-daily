@@ -629,7 +629,7 @@ export default function MonthScreen({ navigation }) {
   ];
   return (
     <View style={styles.container}>
-      <DDCalendar />
+      <DDCalendar navigation={navigation} />
       <ScrollView
         horizontal={true}
         indicatorStyle="white"

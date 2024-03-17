@@ -10,6 +10,7 @@
     border:none;
 }
 
+
 .rc_body-days-of-month .rc_body-cell.rc_selected .rc_body-cell_value {
     background-color: #ffcf12;
     width: 80% !important;

@@ -15,7 +15,7 @@ function DetailScreen({ navigation, route }) {
       style={{ flex: 1, backgroundColor: "#0f0f0f", display: "flex", flexDirection: "column" }}
     >
       <Image
-        source={{ uri: item.imageUrl }}
+        source={require(`../assets/${item.imageUrl}`)}
         style={{
           width: "100%",
           aspectRatio: "130/170",
@@ -25,8 +25,8 @@ function DetailScreen({ navigation, route }) {
       />
 
       <ImageBackground
-        source="../assets/DetailScreenBackground.jpg  "
-        resizeMode="repeat"
+        source={require("../assets/DetailScreenBackground.jpg")}
+        resizeMode="cover"
         style={{
           width: "100%",
           height: "auto",

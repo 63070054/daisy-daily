@@ -9,14 +9,40 @@ import {
   View,
 } from "react-native";
 import DDCalendar from "../components/DDCalendar";
+import { useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
+
 
 export default function MonthScreen({ navigation }) {
+  const [currentNotes, setCurrentNotes] = useState([]);
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const notes = await AsyncStorage.getItem("notes");
+        if (notes !== null) {
+          setCurrentNotes(JSON.parse(notes));
+        }
+      } catch (error) {
+        console.error('Error fetching notes from AsyncStorage:', error);
+      }
+    };
+
+    console.log("isFocused", isFocused)
+
+    if (isFocused) {
+      fetchData();
+    }
+    
+  }, [isFocused]);
   const data = [
     {
       id: "1",
       title: "ความเครียด",
       description: "ความเครียดคืออะไร ?",
-      imageUrl: "../assets/1.jpg",
+      imageUrl: "1.jpg",
       content: (
         <View style={{ flexDirection: "column", width: "100%" }}>
           <Text
@@ -129,7 +155,7 @@ export default function MonthScreen({ navigation }) {
       id: "2",
       title: "ผ่อนคลาย",
       description: "การผ่อนคลายทำอย่างไร ?",
-      imageUrl: "../assets/2.jpg",
+      imageUrl: "2.jpg",
       content: (
         <View style={{ flexDirection: "column", width: "100%" }}>
           <Text
@@ -243,7 +269,7 @@ export default function MonthScreen({ navigation }) {
       id: "3",
       title: "ผู้เชี่ยวชาญ",
       description: "ปรึกกษา/ช่องทางการติดต่อผู้เชี่ยวชาญ ?",
-      imageUrl: "../assets/3.jpg",
+      imageUrl: "3.jpg",
       content: (
         <View style={{ flexDirection: "column", width: "100%" }}>
           <Text
@@ -473,7 +499,7 @@ export default function MonthScreen({ navigation }) {
       id: "4",
       title: "ผองเพื่อน",
       description: "มาคุยกับเพื่อนๆ ของคุณกันเถอะ !",
-      imageUrl: "../assets/4.jpg",
+      imageUrl: "4.jpg",
       content: (
         <View style={{ flexDirection: "column", width: "100%" }}>
           <Text
@@ -508,7 +534,7 @@ export default function MonthScreen({ navigation }) {
           <Text
             style={{
               fontFamily: "ThaiText",
-              marginTop:10,
+              marginTop: 10,
               marginLeft: 20,
               marginRight: 10,
               color: "#fff",
@@ -541,7 +567,7 @@ export default function MonthScreen({ navigation }) {
           <Text
             style={{
               fontFamily: "ThaiText",
-              marginTop:10,
+              marginTop: 10,
               marginLeft: 20,
               marginRight: 10,
               color: "#fff",
@@ -574,7 +600,7 @@ export default function MonthScreen({ navigation }) {
           <Text
             style={{
               fontFamily: "ThaiText",
-              marginTop:10,
+              marginTop: 10,
               marginLeft: 20,
               marginRight: 10,
               color: "#fff",
@@ -607,10 +633,10 @@ export default function MonthScreen({ navigation }) {
           <Text
             style={{
               fontFamily: "ThaiText",
-              marginTop:10,
+              marginTop: 10,
               marginLeft: 20,
               marginRight: 10,
-              marginBottom:20,
+              marginBottom: 20,
               color: "#fff",
               fontSize: 18,
               lineHeight: 20,
@@ -629,7 +655,7 @@ export default function MonthScreen({ navigation }) {
   ];
   return (
     <View style={styles.container}>
-      <DDCalendar navigation={navigation} />
+      <DDCalendar navigation={navigation} currentNotes={currentNotes} />
       <ScrollView
         horizontal={true}
         indicatorStyle="white"
@@ -652,7 +678,7 @@ export default function MonthScreen({ navigation }) {
                   marginLeft: 25,
                   borderRadius: 20,
                 }}
-                source={{ uri: item.imageUrl }}
+                source={require(`../assets/${item.imageUrl}`)}
                 resizeMode="cover"
               />
               <View

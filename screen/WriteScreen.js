@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import { IoMdCheckmark } from "react-icons/io";
 
 export default function WriteScreen({ navigation, route }) {
-  const { value, onChangeText, title } = route.params;
+  const { value, onValueChange, title } = route.params;
 
   const modules = {
     toolbar: [
@@ -47,7 +47,7 @@ export default function WriteScreen({ navigation, route }) {
       <ReactQuill
         theme="snow"
         value={value}
-        onChange={onChangeText}
+        onChange={(text) => onValueChange("note", text)}
         modules={modules}
         placeholder="Write here..."
       />

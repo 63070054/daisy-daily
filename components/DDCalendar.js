@@ -1,32 +1,25 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Calendar } from "@natscale/react-calendar";
 import "@natscale/react-calendar/dist/main.css";
 import { View } from "react-native";
 
-export default function DDCalendar({navigation}) {
+export default function DDCalendar({navigation, currentNotes}) {
   const [value, setValue] = useState(new Date());
 
   const onChange = useCallback(
     (val) => {
-      console.log("val", val);
-      var options = {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      };
-      var formattedDate = val.toLocaleDateString("en-US", options);
-      console.log(formattedDate);
-      navigation.navigate("NoteScreen", { item: formattedDate })
-      setValue(val);
+      navigation.navigate("NoteScreen", { date: val })
     },
-    [setValue]
   );
+  const isHighlight = useCallback((date) => {
+    const alreadyNote = currentNotes.some(note => new Date(note.date).getTime() === date.getTime())
+    return alreadyNote;
+
+  }, [currentNotes]);
 
   return (
     <View>
-      {" "}
-      {/* Wrap the Calendar component in a View */}
-      <Calendar value={value} onChange={onChange} />
+      <Calendar isHighlight={isHighlight} value={value} onChange={onChange} />
     </View>
   );
 }

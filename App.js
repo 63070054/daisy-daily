@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import NoteScreen from "./screen/์NoteScreen";
 import WriteScreen from "./screen/WriteScreen";
+import Toast from 'react-native-toast-message';
 export default function App() {
   const Stack = createNativeStackNavigator();
 
@@ -25,18 +26,21 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeTabs}
-          options={{ headerShown: false, contentStyle:{backgroundColor: "white",}  }}
-        />
-        <Stack.Screen name="DetailScreen" component={DetailScreen} />
-        <Stack.Screen name="NoteScreen" component={NoteScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="WriteScreen" component={WriteScreen} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeTabs}
+            options={{ headerShown: false, contentStyle: { backgroundColor: "white", } }}
+          />
+          <Stack.Screen name="DetailScreen" component={DetailScreen} />
+          <Stack.Screen name="NoteScreen" component={NoteScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="WriteScreen" component={WriteScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Toast />
+    </>
   );
 }
 
